@@ -18,6 +18,10 @@ public class PlayerLogic : MonoBehaviour
     float horizontalMove;
     float verticalMove;
 
+    private AudioSource audioSource;
+    public GameObject enemyDetectRay;
+    private float enemyDetectDistance = 5f;
+
 
 
     private void Awake()
@@ -54,7 +58,8 @@ public class PlayerLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponentInChildren<AudioSource>();
+        audioSource.Stop();
     }
 
     // Update is called once per frame
@@ -63,15 +68,9 @@ public class PlayerLogic : MonoBehaviour
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
 
-        /*if (Input.GetButtonDown("Fire1")) {
-            Debug.Log("attack");
-        }*/
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right);
-
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("attack");
+            audioSource.Play();
         }
     }
 
@@ -87,10 +86,5 @@ public class PlayerLogic : MonoBehaviour
         {
             Debug.Log("trying to leave game area");
         }
-
-        /*if (collision.collider.tag.Equals("Enemy"))
-        {
-            Debug.Log("DAMAGE DEALT!!!!!");
-        }*/
     }
 }
